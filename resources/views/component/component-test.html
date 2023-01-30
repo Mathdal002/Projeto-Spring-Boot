@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout-master}">
+	<head>
+		<title>HumanResource Component Test Suite</title>
+		
+		<!-- Jasmine -->		
+		<link th:href="@{/resources/vendors/jasmine/lib/jasmine-3.3.0/jasmine.css}" rel="stylesheet">
+		
+	</head>
+	
+	<body>
+		<section layout:fragment="content">
+			<div class="row">
+				<div class="col-md-12 col-xs-12">
+					<div class="x_panel">
+						<div class="x_title">
+							<h2><i class="fa fa-gear pull-left"></i>Human Resource Sample Project Components Tests</h2>
+							<div class="clearfix"></div>
+						</div>
+						<div class="x_content jasmine_container">
+							
+							<sefazgo:messages id="js-example-sefazgo-message"/>	
+							<!-- Reserved to Jasmine Content -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<th:block layout:fragment="self-page-javascripts">
+		
+			<!-- Jasmine -->
+			<script th:src="@{/resources/vendors/jasmine/lib/jasmine-3.3.0/jasmine.js}"></script>
+			<script th:src="@{/resources/vendors/jasmine/lib/jasmine-3.3.0/jasmine-html.js}"></script>
+			<script th:src="@{/resources/vendors/jasmine/lib/jasmine-3.3.0/boot.js}"></script>
+			
+			<!-- Sefazgo Message-->
+			<script th:src="@{/resources/js/sefazgo/message/1.0.0/jquery.sefazgo.message.js}"></script>
+			<script th:src="@{/jasmine/spec/SefazgoMessageSpec.js}"></script>
+			
+		</th:block>
+	</body>
+	
+</html>

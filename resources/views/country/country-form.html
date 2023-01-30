@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sefazgo="http://www.sefaz.go.gov.br"
+	layout:decorate="~{layout/layout-master}">
+<head>
+	<title>New Country</title>
+</head>
+
+<body>
+	<section layout:fragment="content">
+		<div class="row">
+			<div class="col-md-12 col-xs-12">
+				<div class="x_panel">
+					<div class="x_title">
+						<h2><i class="fa fa-flag pull-left"></i>New Country</h2>
+						<ul class="nav navbar-right panel_toolbox">
+							<li>
+								<a class="btn btn-default btn-xs pull-right" th:href="@{/countries}">
+									<div class="fa fa-list-ul"> List</div>
+								</a>
+							</li>
+						</ul>
+						<div class="clearfix"></div>
+					</div>
+					<div class="x_content">
+						<br />
+						
+						<form method="post" th:object="${country}" th:action="@{/countries/save}" class="form-horizontal form-label-left input_mask" novalidate>
+
+							<!-- Messages -->
+							<sefazgo:messages/>
+							
+							<!-- Country Id -->
+							<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback" sefazgo:checkError="id">
+								<label class="control-label" for="id">ID</label>
+								<input id="id" type="text" th:field="*{id}" class="form-control has-feedback-left js-sefazgo-inputclear" maxlength="2"
+									placeholder="Two capitalized characters of Country identification" required="required"/>
+								<span class="fa fa-keyboard-o form-control-feedback left" aria-hidden="true"></span>
+							</div>
+
+							<!-- Country Name -->
+							<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback" sefazgo:checkError="name">
+								<label class="control-label" for="name">Name</label> 
+								<input id="name" type="text" th:field="*{name}" class="form-control has-feedback-left js-sefazgo-inputclear" required="required"/>
+								<span class="fa fa-keyboard-o form-control-feedback left" aria-hidden="true"></span>
+							</div>
+							
+							<!-- Region Id -->
+							<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback" sefazgo:checkError="region.id">
+								<label class="control-label" for="region">Region</label>
+								<select id="region" th:field="*{region.id}" class="form-control has-feedback-left js-sefazgo-inputclear" required="required">
+									<option value="" selected default >Select a Region</option>
+									<option th:each="region : ${regions}" th:value="${region.id}" th:text="${region.name}"/>
+								</select>
+								<span class="fa fa-list-ul form-control-feedback left" aria-hidden="true"></span>
+							</div>
+
+							<div class="form-group"></div>
+							<div class="ln_solid"></div>
+							
+							<div class="form-group">
+								<div class="btn-toolbar pull-right">
+									<a class="btn  btn-default btn-sm" th:href="@{/countries}" th:if="*{id != null}">Cancel</a>
+									<button type="reset" class="btn btn-default btn-sm" th:if="*{id == null}">Clean</button>
+									<button type="submit" class="btn  btn-dark btn-sm">Save</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<th:block layout:fragment="self-page-javascripts">
+    	<!-- Sefazgo InputClear-->
+		<script th:src="@{/resources/js/sefazgo/inputclear/1.0.0/jquery.sefazgo.inputclear.js}"></script>
+	</th:block>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout-master}">
+	<head>
+		<title>Configuration Information</title>
+	</head>
+	<body>
+		<section layout:fragment="content">
+			<div class="row">
+				<div class="col-md-12 col-xs-12">
+					<div class="x_panel">
+						<div class="x_title">
+							<h2><i class="fa fa-gear pull-left"></i>hrs configuration information</h2>
+							<div class="clearfix"></div>
+						</div>
+						<div class="x_content">
+						
+							<div class="" role="tabpanel" data-example-id="togglable-tabs">
+								<ul id="settingInformationTab" class="nav nav-tabs bar_tabs" role="tablist">
+									<li role="presentation" class="active"><a href="#settinginfo" id="settinginfo-tab" role="tab" data-toggle="tab" aria-expanded="true">About</a></li>
+								</ul>
+							</div>
+							<div id="settingInformationTabContent" class="tab-content">
+								<div role="tabpanel" class="tab-pane fade active in" id="settingInfo" aria-labelledby="settinginfo-tabe">
+									<div class="col-md-12 col-xs-12">
+										<div class="x_panel">
+											<div class="x_content">
+												<div class="flex">
+													<ul class="list-inline widget_profile_box">
+														<li class="pull-right">
+														</li>
+													</ul>
+												</div>
+												<h2 style="margin-left:10px">hrs</h2>
+												<div class="divider"></div>
+												<h4 style="margin-left:10px">Version: 1.0.0-SNAPSHOT</h4>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</body>
+</html>

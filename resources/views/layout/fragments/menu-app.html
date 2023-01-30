@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<body>
+	<div class="col-md-3 left_col" th:fragment="menu">
+		<div class="left_col scroll-view" style="width: 100%;">
+			<div class="sefazgo_logo">
+				<a th:href="@{/dashboard}" class="site_title_sefazgo">
+					<img class="sefazgo_menu_img" th:src="@{/resources/images/economia-logo-negative.png}" alt="Secretaria de Estado da Economia de Goias" title="Secretaria de Estado da Economia de Goias"/>
+					<img class="sefazgo_menu_img_sm" th:src="@{/resources/images/economia-logo-negative-sm-yellow.png}" alt="Secretaria de Estado da Economia de Goias" title="Secretaria de Estado da Economia de Goias"/>
+				</a>
+			</div>
+			
+			<div class="clearfix"></div>
+            <div class="divider" style="border-color:#205A36"></div>
+
+            <!-- menu profile quick info -->
+			<a th:if="${session.usuarioAutenticado != null}"
+				th:href="@{/profiles/info}" class="profile clearfix"
+				th:with="pessoaAutenticada=${session.usuarioAutenticado.pessoaAutenticada},
+            			isPessoaFisica=${#strings.toString(pessoaAutenticada.tipoPessoa) == 'F'},
+						isSexoMasculino=${isPessoaFisica && #strings.toString(pessoaAutenticada.sexo) == 'M'},
+						imgProfile=${isPessoaFisica && isSexoMasculino ? 'user_f_m.png'
+            			 	: (isPessoaFisica && !isSexoMasculino ? 'user_f_f.png' : 'user_j.png' )},
+            			 fotoUsuario=${session.usuarioAutenticadoFoto}" title="Informações do Usuário">
+				<div class="profile_pic" style="width: 50px; padding-bottom: 8px">
+					<img th:if="${fotoUsuario != null}" th:src="|data:image/jpeg;charset=utf-8;base64,${fotoUsuario}|"
+						class="img-circle profile_img" style="width: 45px; height: 45px; margin: 10px 0px 0px 8%" alt="Foto do Usuário" title="Foto do Usuário">
+					<img th:if="${fotoUsuario == null}" th:src="@{/resources/images/__${imgProfile}__}"
+						class="img-circle profile_img" style="width: 45px; height: 45px; margin: 10px 0px 0px 8%" alt="Usuário sem Foto" title="Usuário sem Foto">
+              </div>
+				<div class="profile_info"
+					style="width: 175px; padding: 17px 0px 8px 5px">
+					<h2 th:text="${pessoaAutenticada.descricao}"
+						style="font-size: 12px; color: #A5BDAE; margin-bottom: 3px"></h2>
+					<h2
+						th:text="${isPessoaFisica ? pessoaAutenticada.cpfFormatado : pessoaAutenticada.cnpjFormatado}"
+						style="font-size: 10px; color: #A5BDAE"></h2>
+              </div>
+            </a>
+            
+			<!-- Sidebar Menu Content -->
+			<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+				<div class="menu_section">
+					<ul class="nav side-menu">
+						<li>
+							<a><i class="fa fa-flag"></i> Country <span class="fa fa-chevron-down"></span></a>
+							<ul class="nav child_menu">
+								<li><a th:href="@{/countries/form}">New Country</a></li>
+								<li><a th:href="@{/countries}">List Countries</a></li>
+							</ul>
+						</li>
+						<li>
+							<a><i class="fa fa-globe"></i> Region <span class="fa fa-chevron-down"></span></a>
+							<ul class="nav child_menu">
+								<li><a th:href="@{/regions/form}">New Region</a></li>
+								<li><a th:href="@{/regions}">List Regions</a></li>
+							</ul>
+						</li>
+						<li>
+							<a><i class="fa fa-cubes"></i>Sefazgo Components <span class="fa fa-chevron-down"></span></a>
+							<ul class="nav child_menu">
+								<li><a th:href="@{/components}">Example of Components</a></li>
+								<li><a th:href="@{/components/test?random=false}">Test of Components</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+			
+			<!-- menu footer buttons -->
+			<div class="sidebar-footer hidden-small">
+				<a data-toggle="tooltip" data-placement="top" title="Dashboard" th:href="@{/dashboard}">
+					<span class="fa fa-bar-chart" aria-hidden="true"></span>
+				</a>
+				<a data-toggle="tooltip" data-placement="top" title="User Profile" th:href="@{/profiles/info}">
+					<span class="fa fa-user" aria-hidden="true"></span>
+				</a>
+				<a data-toggle="tooltip" data-placement="top" title="Settings" th:href="@{/settings/information}">
+					<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+				</a>
+				<a data-toggle="tooltip" data-placement="top" title="Logout" th:href="@{/logout}">
+					<span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+				</a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

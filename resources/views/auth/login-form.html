@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/cover-pages/cover-page-master}">
+
+	<head>
+	     <title>Login | Secretaria de Estado da Fazenda de Goiás</title>
+	</head>
+
+	<body th:with="hasX509=${#request.getAttribute('javax.servlet.request.X509Certificate') != null}">
+		<section layout:fragment="cover-page-content">
+			<div class="row">
+				<div class="col-sm-6 col-sm-offset-3 form-box" style="padding-top:0; margin-top:0">
+					<div style="border: 0.05em solid #54585c">
+						<div class="form-top" style="margin-bottom:0; padding-bottom:0">
+							<div class="form-top-left">
+								<h3 style="font-family:fantasy; font-size:27px; color:#999">HRS</h3>
+								<p th:if="${hasX509}">To authenticate, click in the button bellow.</p>
+								<p th:if="${!hasX509}">To authenticate, please inform your credentials.</p>
+							</div>
+							<div class="form-top-right">
+								<i class="fa fa-shield"></i>
+							</div>
+							<div id="errorMessageContainer" th:classappend="${errorDetails != null} ? '' :'hidden'">
+								<span class="label label-warning">Atention</span>
+								<span id="errorMessage" th:text="${errorDetails}" style="color:#f0ad4e; font-size:12px"></span>
+							</div>
+						</div>
+						<div class="form-bottom" th:if="${!hasX509}">
+							<form id="formAuthenticate"method="POST" th:action="@{/auth/login}">
+								<input id="redirect" name="redirect" type="hidden" th:value="${#request.getParameter('redirect')}">
+								<div class="form-group">
+									<label for="username" class="sr-only">User</label>
+									<input type="text" id="username" name="username" autocomplete="off" class="form-username form-control required" placeholder="CPF:"/>
+								</div>
+								<div class="form-group input-group">
+									<input type="password" id="password" name="password" autocomplete="off" class="form-password form-control required" placeholder="Password" maxlength="15"/>
+									 <span class="input-group-btn">
+										<button id="btnTwoFactor" type="button" class="btn" style="background-color: #dab87c" title="To Factor Authentication">
+											<div class="fa fa-qrcode fa-lg"></div>
+										</button>
+									</span>
+								</div>
+								<div id="twoFactor" class="form-group" style="display: none;">
+									<label for="verificationCode" class="sr-only">Verification Code</label>
+							        <input type="text" name="verificationCode" id="verificationCode" class="form-password form-control" autocomplete="off" placeholder="Verification Code:"/>
+								</div>
+								<button type="submit" class="btn" id="btnAuthenticate">
+									<span class="fa fa-lock fa-lg" style="padding-right: 5px;"></span>
+									<span id="btnAuthenticateText">Autenticar</span>
+								</button>
+							</form>
+						</div>
+						<div class="form-bottom" th:if="${hasX509}">
+							<form>
+								<button type="button" class="btn" id="btnAuthenticate" th:onclick="|window.location.href='@{/}'|">
+									 <span class="fa fa-lock fa-lg" style="padding-right: 10px;"></span>Authenticate with Digital Certificate
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+	
+			<div class="row" th:if="${!hasX509}">
+				<div class="col-sm-6 col-sm-offset-3 social-login">
+					<div class="social-login-buttons">
+						<a class="btn btn-link-2" href="#"><i class="fa fa-thumbs-o-down"></i> Forgot your password?</a>
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		<th:block layout:fragment="self-page-javascripts">
+	    	<script th:src="@{/resources/js/credencial.js}"></script>
+	    </th:block>
+	</body>
+</html>

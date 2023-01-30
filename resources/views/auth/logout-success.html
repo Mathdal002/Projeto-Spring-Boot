@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/cover-pages/cover-page-master}">
+
+	<head>
+	     <title>Logout</title>
+	</head>
+
+	<body>
+		<section layout:fragment="cover-page-content">
+			<div class="row" style="margin:0px 0px 30px 0px">
+				<div class="col-sm-6 col-sm-offset-3 form-box">
+					<div style="border: 0.05em solid #54585c">
+						<div class="form-top">
+							<div class="form-top-left">
+								<h3>Logout</h3>
+								<p>Você foi desconectado com sucesso!</p>
+							</div>
+							<div class="form-top-right">
+								<i class="fa fa-sign-out"></i>
+							</div>
+						</div>
+						<div class="form-bottom" style="text-align:center">
+							<div class="mid_center">
+								<p>Por questões de segurança, feche todas as janelas do seu navegador, principalmente caso esteja utilizando Certificado Digital.</p>
+								<button type="button" class="btn btn-orange btn-lg"  th:onclick="|location.href='@{/auth/login-form}'|">Voltar para a página de Login</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</body>
+</html>
